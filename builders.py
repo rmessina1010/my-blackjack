@@ -2,7 +2,7 @@ import random
 
 
 def build_deck():
-    deck = []
+    deck = build_deck_alias()
     for c in range(0, 13):
         for h in range(0, 4):
             i = h + c*4
@@ -12,7 +12,7 @@ def build_deck():
 
 def build_card(h, c, i):
     value = c if (c < 10) else 10
-    color = "white" if (c % 2) else "red"
+    color = "white" if (h % 2) else "red"
     suits = ["♠", "♥", "♣", "♦"]
     honors = ["J", "Q", "K"]
     face = str(c) if (c < 10) else honors[c-10]
@@ -30,7 +30,7 @@ def build_card(h, c, i):
 
 
 def build_deck_alias():
-    return list(range(0, 53))
+    return list(range(0, 52))
 
 
 def draw_from_alias(alias):

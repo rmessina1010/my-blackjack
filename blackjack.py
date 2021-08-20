@@ -1,12 +1,14 @@
-import random
+from play_mod import play
+from builders import build_deck
 
 balance = 500
+ref_deck = build_deck()
 
 while True:
-    print("====BLACKJACK!====")
+    print("\n====BLACKJACK!====")
     print("Your Balance is:", balance)
     wager = input("What do you wager? ")
-    if (wager.lower() == 'quit'):
+    if (wager.lower() == 'q' or wager.lower() == 'quit'):
         break
     try:
         wager = int(wager)
@@ -16,7 +18,7 @@ while True:
         print("Invalid bet!!!")
         continue
     print("playing blackjack")
-    balance += wager * random.choice([-1, -1, -1, 0, 1, 2])
+    balance += wager * play()
     if balance < 1:
         print("Your Balance is:", balance)
         print("You are broke!!")

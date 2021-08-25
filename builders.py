@@ -31,12 +31,3 @@ def build_card(h, c, i):
 
 def build_deck_alias():
     return list(range(0, 52))
-
-
-def draw_from_alias(alias):
-    l = len(alias)
-    if l < 1:
-        return False
-    i = random.randint(0, l-1)
-    card = alias.pop(i)
-    return card

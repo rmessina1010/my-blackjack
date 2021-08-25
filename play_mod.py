@@ -8,7 +8,7 @@ def play():
     player_hand = []
     house_hand = []
 
-    result: 0
+    result = 0
     if player_pt > 21 or (house_pt > player_pt and house_pt < 22):
         result = -1
     elif player_pt > house_pt:

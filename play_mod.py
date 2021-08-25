@@ -1,4 +1,5 @@
 import random
+from views_mod import show_draw
 
 
 def play():
@@ -58,7 +59,7 @@ def tally(hand):
         else:
             sum += card.value
     sum = sum + (aces * 11)
-    for x in range(0, aces):
+    for i in range(0, aces):
         if sum > 21:
             sum -= 10
 

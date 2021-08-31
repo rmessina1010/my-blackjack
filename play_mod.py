@@ -1,14 +1,19 @@
 import random
-from views_mod import show_draw
+from views_mod import show_draw, show_hands
+from builders import build_deck_alias
 
 
-def play():
+def play(ref_deck):
     house_pt = 0
     player_pt = 0
     player_hand = []
     house_hand = []
+    deck_alias = build_deck_alias()
 
     result = 0
+
+    deal_in(deck_alias, house_hand, player_hand, ref_deck)
+
     if player_pt > 21 or (house_pt > player_pt and house_pt < 22):
         result = -1
     elif player_pt > house_pt:
@@ -27,21 +32,21 @@ def play():
     return result
 
 
-def house_plays(house_pt, player_pt, house_hand, alias):
+def house_plays(house_pt, player_pt, house_hand, alias, ref_deck):
     while player_pt < 22 and house_pt < 17 and house_pt < player_pt:
-        new_card = draw_from_alias(alias)
+        new_card = draw_from_alias(alias,  ref_deck)
         show_draw("The house ", new_card)
         house_hand.append(new_card)
         house_pt += new_card.value
     return house_hand
 
 
-def user_plays(player_hand, player_pt, alias):
+def user_plays(player_hand, player_pt, alias, ref_deck):
     while True:
         choice = input("Hit or Stand? ")
         if choice.lower()[0] == "s":
             break
-        new_card = draw_from_alias(alias)
+        new_card = draw_from_alias(alias,  ref_deck)
         show_draw("You ", new_card)
         player_pt += new_card.value
         player_hand.append(new_card)
@@ -66,10 +71,17 @@ def tally(hand):
     return sum
 
 
-def draw_from_alias(alias):
+def draw_from_alias(alias, ref_deck):
     l = len(alias)
     if l < 1:
         return False
     i = random.randint(0, l-1)
     card = alias.pop(i)
-    return card
+    return ref_deck[card]
+
+
+def deal_in(alias, house, player, ref_deck):
+    for i in range(2):
+        house.append(draw_from_alias(alias, ref_deck))
+        player.append(draw_from_alias(alias,  ref_deck))
+    show_hands(house, player, True)

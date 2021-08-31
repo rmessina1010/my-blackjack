@@ -17,8 +17,8 @@ while True:
     if (wager < 1 or wager > balance):
         print("Invalid bet!!!")
         continue
-    print("playing blackjack")
-    balance += wager * play()
+    print("Playing blackjack...")
+    balance += wager * play(ref_deck)
     if balance < 1:
         print("Your Balance is:", balance)
         print("You are broke!!")

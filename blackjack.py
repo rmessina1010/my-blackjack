@@ -1,8 +1,8 @@
 from play_mod import play
-from builders import build_deck
+from builders import Deck_Stack
 
 balance = 500
-ref_deck = build_deck()
+ref_deck = Deck_Stack(1)
 
 while True:
     print("\n====BLACKJACK!====")
@@ -19,6 +19,7 @@ while True:
         continue
     print("Playing blackjack...")
     balance += wager * play(ref_deck)
+    print(ref_deck.remaining_cards())
     if balance < 1:
         print("Your Balance is:", balance)
         print("You are broke!!")

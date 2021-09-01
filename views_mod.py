@@ -2,6 +2,8 @@ def show_hands(house, player, hide):
     house_str = ""
     player_str = ""
     for card in house:
+        if card is False:
+            return
         if hide and house_str == "":
             house_str = "?? | "
             continue
@@ -13,4 +15,6 @@ def show_hands(house, player, hide):
 
 
 def show_draw(who, card):
+    if card is False:
+        return
     print(who + " drew a " + card['face'] + card['suit'])

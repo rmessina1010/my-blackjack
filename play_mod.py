@@ -41,7 +41,7 @@ def house_plays(house_pt, player_pt, house_hand, ref_deck):
 
 
 def user_plays(player_hand,  ref_deck, house_hand):
-    print(player_hand)
+    # print(player_hand)
     player_pt = tally(player_hand)
     while True:
         choice = False
@@ -53,7 +53,8 @@ def user_plays(player_hand,  ref_deck, house_hand):
         show_draw("You ", new_card)
         player_hand.append(new_card)
         player_pt = tally(player_hand)
-       # print(player_hand)
+        # print(player_hand)
+        # print(player_pt)
         show_hands(house_hand, player_hand, True)
         if player_pt > 21:
             print("You Bust!!")

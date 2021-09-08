@@ -24,9 +24,9 @@ class Deck_Stack:
     def __build_deck(self):
         deck = self.__build_deck_alias(self.depth)
         for d in range(1, 1+self.depth):
-            for c in range(0, 13):
+            for c in range(1, 14):
                 for h in range(0, 4):
-                    i = h + c*4 * d
+                    i = h + (c-1)*4 * d
                     deck[i] = self.__build_card(h, c, i)
         return deck
 
@@ -35,8 +35,8 @@ class Deck_Stack:
         color = "white" if (h % 2) else "red"
         suits = ["♠", "♥", "♣", "♦"]
         honors = ["J", "Q", "K"]
-        face = str(c) if (c < 10) else honors[c-10]
-        if (face == "0"):
+        face = str(c) if (c < 11) else honors[c-11]
+        if (face == "1"):
             face = "A"
         card = {
             "value": value,

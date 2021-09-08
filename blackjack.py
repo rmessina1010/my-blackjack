@@ -3,6 +3,7 @@ from builders import Deck_Stack
 
 balance = 500
 ref_deck = Deck_Stack(1)
+# print(ref_deck.reference)
 
 while True:
     print("\n====BLACKJACK!====")

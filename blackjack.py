@@ -19,7 +19,7 @@ while True:
         continue
     print("Playing blackjack...")
     balance += wager * play(ref_deck)
-    print(ref_deck.remaining_cards())
+    # print(ref_deck.remaining_cards())
     if balance < 1:
         print("Your Balance is:", balance)
         print("You are broke!!")

@@ -12,6 +12,7 @@ def show_hands(house, player, hide):
         print("\nThe house has: " + house_str)
         print("You have: " + player_str + "\n")
     except (KeyError, TypeError):
+        print("No card.")
         return
 
 
@@ -19,4 +20,5 @@ def show_draw(who, card):
     try:
         print(who, "drew a " + card['face'] + card['suit'])
     except (TypeError, KeyError):
+        print("No card.")
         return

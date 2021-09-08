@@ -12,6 +12,7 @@ def play(ref_deck):
     result = 0
 
     deal_in(ref_deck, house_hand, player_hand)
+    user_plays(player_hand, player_pt, ref_deck)
 
     if player_pt > 21 or (house_pt > player_pt and house_pt < 22):
         result = -1
@@ -36,7 +37,7 @@ def house_plays(house_pt, player_pt, house_hand, ref_deck):
         new_card = ref_deck.draw_card()
         show_draw("The house ", new_card)
         house_hand.append(new_card)
-        house_pt += new_card.value
+        house_pt += new_card["value"]
     return house_hand
 
 
@@ -47,8 +48,9 @@ def user_plays(player_hand, player_pt, ref_deck):
             break
         new_card = ref_deck.draw_card()
         show_draw("You ", new_card)
-        player_pt += new_card.value
         player_hand.append(new_card)
+        player_pt += new_card["value"]
+        print(player_hand)
         if player_pt > 21:
             print("You Bust!!")
             break
@@ -75,3 +77,5 @@ def deal_in(ref_deck, house, player):
         house.append(ref_deck.draw_card())
         player.append(ref_deck.draw_card())
     show_hands(house, player, True)
+
+# note: run tally operation after each draw!!!

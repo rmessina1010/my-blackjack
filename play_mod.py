@@ -12,7 +12,7 @@ def play(ref_deck):
     result = 0
 
     deal_in(ref_deck, house_hand, player_hand)
-    user_plays(player_hand, player_pt, ref_deck)
+    user_plays(player_hand, player_pt, ref_deck, house_hand)
 
     if player_pt > 21 or (house_pt > player_pt and house_pt < 22):
         result = -1
@@ -41,16 +41,19 @@ def house_plays(house_pt, player_pt, house_hand, ref_deck):
     return house_hand
 
 
-def user_plays(player_hand, player_pt, ref_deck):
+def user_plays(player_hand, player_pt, ref_deck, house_hand):
     while True:
-        choice = input("Hit or Stand? ")
-        if choice.lower()[0] == "s":
+        choice = False
+        while choice != "h" and choice != "s":
+            choice = input("[H]it or [S]tand? ").lower()[0]
+        if choice == "s":
             break
         new_card = ref_deck.draw_card()
         show_draw("You ", new_card)
         player_hand.append(new_card)
         player_pt += new_card["value"]
-        print(player_hand)
+       # print(player_hand)
+        show_hands(house_hand, player_hand, True)
         if player_pt > 21:
             print("You Bust!!")
             break

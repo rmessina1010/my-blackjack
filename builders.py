@@ -50,3 +50,11 @@ class Deck_Stack:
 
     def __build_deck_alias(self, depth):
         return list(range(0, 52*depth))
+
+
+"""
+    def blackjack(self):
+        self.card_stack.pop(0)
+        self.card_stack.pop(50)
+        return self.reference[0], self.reference[51]
+"""

@@ -15,10 +15,11 @@ def play(ref_deck):
 
     if player_pt > 21 or (house_pt > player_pt and house_pt < 22):
         result = -1
+    elif player_pt == 21 and len(player_hand) == 2:
+        result = 0 if (house_pt == 21 and len(house_pt) == 2) else 1.5
     elif player_pt > house_pt:
-        result = 1.5 if len(player_hand) == 2 else 1
-    elif player_pt == 21 and len(player_hand) == 2 and house_pt == 21 and len(house_hand) != 2:
-        result = 1.5
+        result = 1
+
     if result == 1.5:
         print("BLACKJACK!!!")
     if result > 0:
@@ -56,8 +57,9 @@ def user_plays(player_hand,  ref_deck, house_hand):
         # print(player_hand)
         # print(player_pt)
         show_hands(house_hand, player_hand, True)
-        if player_pt > 21:
-            print("You Bust!!")
+        if player_pt > 20:
+            if player_pt > 21:
+                print("You Bust!!")
             return player_pt
 
 
@@ -78,9 +80,14 @@ def tally(hand):
 
 
 def deal_in(ref_deck, house, player):
+    """
+        test = ref_deck.blackjack()
+        player.extend(test)
+    """
     for i in range(2):
         house.append(ref_deck.draw_card())
         player.append(ref_deck.draw_card())
     show_hands(house, player, True)
+
 
 # note: run tally operation after each draw!!!

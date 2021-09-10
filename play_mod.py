@@ -54,6 +54,8 @@ def user_plays(player_hand,  ref_deck, house_hand):
     while True:
         choice = False
         while choice != "h" and choice != "s" and choice != "q":
+            if player_pt == 21:
+                return player_pt
             choice = input("[H]it or [S]tand? ")
             choice = None if len(choice) < 1 else choice[0].lower()
         if choice == "q":
@@ -68,9 +70,8 @@ def user_plays(player_hand,  ref_deck, house_hand):
         # print(player_hand)
         # print(player_pt)
         show_hands(house_hand, player_hand, True)
-        if player_pt > 20:
-            if player_pt > 21:
-                print("You Bust!!")
+        if player_pt > 21:
+            print("You Bust!!")
             return player_pt
 
 

@@ -33,16 +33,20 @@ def play(ref_deck):
 
 
 def house_plays(player_pt, house_hand, ref_deck):
+    print("\n---House's Turn---")
     house_pt = tally(house_hand)
     while house_pt < 17 and (house_pt < player_pt < 22):
         new_card = ref_deck.draw_card()
         show_draw("The house ", new_card)
         house_hand.append(new_card)
         house_pt += new_card["value"]
+    if house_pt > 21:
+        print("House Busts!!")
     return house_pt
 
 
 def user_plays(player_hand,  ref_deck, house_hand):
+    print("---Your Turn---")
     # print(player_hand)
     player_pt = tally(player_hand)
     while True:

@@ -10,8 +10,9 @@ def play(ref_deck):
     result = 0
 
     deal_in(ref_deck, house_hand, player_hand)
-    house_pt = 0
     player_pt = user_plays(player_hand, ref_deck, house_hand)
+    house_pt = house_plays(player_pt, house_hand, ref_deck)
+    show_hands(house_hand, player_hand, False)
 
     if player_pt > 21 or (house_pt > player_pt and house_pt < 22):
         result = -1
@@ -32,13 +33,14 @@ def play(ref_deck):
     return result
 
 
-def house_plays(house_pt, player_pt, house_hand, ref_deck):
-    while player_pt < 22 and house_pt < 17 and house_pt < player_pt:
+def house_plays(player_pt, house_hand, ref_deck):
+    house_pt = tally(house_hand)
+    while house_pt < 17 and (house_pt < player_pt < 22):
         new_card = ref_deck.draw_card()
         show_draw("The house ", new_card)
         house_hand.append(new_card)
         house_pt += new_card["value"]
-    return house_hand
+    return house_pt
 
 
 def user_plays(player_hand,  ref_deck, house_hand):

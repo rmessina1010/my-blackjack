@@ -15,6 +15,8 @@ def play(ref_deck):
     show_hands(house_hand, player_hand, False)
 
     if player_pt > 21 or (player_pt < house_pt < 22):
+        if (house_pt == 21 and len(house_pt) == 2):
+            print("HOUSE HAS BLACKJACK!!!")
         result = -1
     elif player_pt == 21 and len(player_hand) == 2:
         result = 0 if (house_pt == 21 and len(house_pt) == 2) else 1.5
@@ -22,7 +24,7 @@ def play(ref_deck):
         result = 1
 
     if result == 1.5:
-        print("BLACKJACK!!!")
+        print("YOU HAVE BLACKJACK!!!")
     if result > 0:
         print("You Win!")
     elif result < 0:
@@ -51,8 +53,12 @@ def user_plays(player_hand,  ref_deck, house_hand):
     player_pt = tally(player_hand)
     while True:
         choice = False
-        while choice != "h" and choice != "s":
-            choice = input("[H]it or [S]tand? ").lower()[0]
+        while choice != "h" and choice != "s" and choice != "q":
+            choice = input("[H]it or [S]tand? ")
+            choice = None if len(choice) < 1 else choice[0].lower()
+        if choice == "q":
+            print("Goodbye.")
+            exit()
         if choice == "s":
             return player_pt
         new_card = ref_deck.draw_card()

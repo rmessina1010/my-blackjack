@@ -14,11 +14,11 @@ def play(ref_deck):
     house_pt = house_plays(player_pt, house_hand, ref_deck)
     show_hands(house_hand, player_hand, False)
 
-    if player_pt > 21 or (house_pt > player_pt and house_pt < 22):
+    if player_pt > 21 or (player_pt < house_pt < 22):
         result = -1
     elif player_pt == 21 and len(player_hand) == 2:
         result = 0 if (house_pt == 21 and len(house_pt) == 2) else 1.5
-    elif player_pt > house_pt:
+    elif house_pt > 21 or (house_pt < player_pt < 22):
         result = 1
 
     if result == 1.5:
@@ -29,7 +29,6 @@ def play(ref_deck):
         print("You lose!")
     else:
         print("PUSH!")
-      # return random.choice([-1, -1, -1, 0, 1, 2])
     return result
 
 

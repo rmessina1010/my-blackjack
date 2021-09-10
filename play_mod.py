@@ -15,11 +15,11 @@ def play(ref_deck):
     show_hands(house_hand, player_hand, False)
 
     if player_pt > 21 or (player_pt < house_pt < 22):
-        if (house_pt == 21 and len(house_pt) == 2):
+        if (house_pt == 21 and len(house_hand) == 2):
             print("HOUSE HAS BLACKJACK!!!")
         result = -1
     elif player_pt == 21 and len(player_hand) == 2:
-        result = 0 if (house_pt == 21 and len(house_pt) == 2) else 1.5
+        result = 0 if (house_pt == 21 and len(house_hand) == 2) else 1.5
     elif house_pt > 21 or (house_pt < player_pt < 22):
         result = 1
 

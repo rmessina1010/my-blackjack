@@ -1,5 +1,6 @@
 from play_mod import exit_game, play
 from builders import Deck_Stack
+from views_mod import show_balance
 
 balance = 500
 ref_deck = Deck_Stack(1)
@@ -7,7 +8,7 @@ ref_deck = Deck_Stack(1)
 
 while True:
     print("\n====BLACKJACK!====")
-    print("Your Balance is:", balance)
+    show_balance(balance)
     wager = input("What do you wager? ")
     if (wager.lower() == 'q' or wager.lower() == 'quit'):
         break
@@ -19,10 +20,10 @@ while True:
         print("Invalid bet!!!")
         continue
     print("Playing blackjack...")
-    balance += wager * play(ref_deck)
+    balance += int(wager * play(ref_deck))
     # print(ref_deck.remaining_cards())
     if balance < 1:
-        print("Your Balance is:", balance)
+        show_balance(balance)
         print("You are broke!!")
         break
 exit_game()

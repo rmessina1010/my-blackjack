@@ -22,3 +22,7 @@ def show_draw(who, card):
     except (TypeError, KeyError):
         print("No card.")
         return
+
+
+def show_balance(balance):
+    print(f"Your Balance is: ${balance:.2f}")

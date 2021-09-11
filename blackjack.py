@@ -9,15 +9,20 @@ ref_deck = Deck_Stack(1)
 while True:
     print("\n====BLACKJACK!====")
     show_balance(balance)
-    wager = input("What do you wager? ")
-    if (wager.lower() == 'q' or wager.lower() == 'quit'):
+    wager = input("What do you wager? ").lower()
+    if (wager == 'q' or wager == 'quit'):
         break
     try:
         wager = int(wager)
     except ValueError:
-        wager = 0
-    if (wager < 1 or wager > balance):
         print("Invalid bet!!!")
+        continue
+    if (wager < 1):
+        print("You must wager at least $1!")
+        continue
+    if (wager > balance):
+        print(
+            f"You don't have enough funds to cover this bet!\nThe maximum bet is ${balance:.2f}")
         continue
     print("Playing blackjack...")
     balance += int(wager * play(ref_deck))

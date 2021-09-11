@@ -1,4 +1,3 @@
-import random
 from views_mod import show_draw, show_hands
 
 
@@ -38,7 +37,7 @@ def house_plays(player_pt, house_hand, ref_deck):
     print("\n---House's Turn---")
     house_pt = tally(house_hand)
     while house_pt < 17 and (house_pt < player_pt < 22):
-        new_card = ref_deck.draw_card()
+        new_card = eodeck_check(ref_deck.draw_card())
         show_draw("The house ", new_card)
         house_hand.append(new_card)
         house_pt += new_card["value"]
@@ -63,7 +62,7 @@ def user_plays(player_hand,  ref_deck, house_hand):
             exit()
         if choice == "s":
             return player_pt
-        new_card = ref_deck.draw_card()
+        new_card = eodeck_check(ref_deck.draw_card())
         show_draw("You ", new_card)
         player_hand.append(new_card)
         player_pt = tally(player_hand)
@@ -97,9 +96,14 @@ def deal_in(ref_deck, house, player):
         player.extend(test)
     """
     for i in range(2):
-        house.append(ref_deck.draw_card())
-        player.append(ref_deck.draw_card())
+        house.append(eodeck_check(ref_deck.draw_card()))
+        player.append(eodeck_check(ref_deck.draw_card()))
     show_hands(house, player, True)
 
 
-# note: run tally operation after each draw!!!
+def eodeck_check(card):
+    if card == False:
+        print("No cards left to play.")
+        print("Goodbye.")
+        exit()
+    return card

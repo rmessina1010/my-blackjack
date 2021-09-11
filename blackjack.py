@@ -26,3 +26,4 @@ while True:
         print("You are broke!!")
         break
 print("Goodbye.")
+exit()

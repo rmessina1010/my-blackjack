@@ -58,8 +58,7 @@ def user_plays(player_hand,  ref_deck, house_hand):
             choice = input("[H]it or [S]tand? ")
             choice = None if len(choice) < 1 else choice[0].lower()
         if choice == "q":
-            print("Goodbye.")
-            exit()
+            exit_game()
         if choice == "s":
             return player_pt
         new_card = eodeck_check(ref_deck.draw_card())
@@ -101,9 +100,14 @@ def deal_in(ref_deck, house, player):
     show_hands(house, player, True)
 
 
+def exit_game(message=False):
+    if message:
+        print(message)
+    print("Goodbye.")
+    exit()
+
+
 def eodeck_check(card):
     if card == False:
-        print("No cards left to play.")
-        print("Goodbye.")
-        exit()
+        exit_game("No cards left to play.")
     return card

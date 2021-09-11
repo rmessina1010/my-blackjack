@@ -1,4 +1,4 @@
-from play_mod import play
+from play_mod import exit_game, play
 from builders import Deck_Stack
 
 balance = 500
@@ -25,5 +25,4 @@ while True:
         print("Your Balance is:", balance)
         print("You are broke!!")
         break
-print("Goodbye.")
-exit()
+exit_game()

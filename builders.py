@@ -1,4 +1,5 @@
 import random
+import colors
 
 
 class Deck_Stack:
@@ -32,7 +33,7 @@ class Deck_Stack:
 
     def __build_card(self, h, c, i):
         value = c if (c < 10) else 10
-        color = "white" if (h % 2) else "red"
+        color = colors.R_CARD_COL if (h % 2) else colors.K_CARD_COL
         suits = ["♠", "♥", "♣", "♦"]
         honors = ["J", "Q", "K"]
         face = str(c) if (c < 11) else honors[c-11]

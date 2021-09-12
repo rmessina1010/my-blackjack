@@ -1,4 +1,5 @@
 from views_mod import show_draw, show_hands
+import colors
 
 
 def play(ref_deck):
@@ -34,7 +35,7 @@ def play(ref_deck):
 
 
 def house_plays(player_pt, house_hand, ref_deck):
-    print("\n---House's Turn---")
+    print(f"\n---{colors.TURN_COL}House's Turn{colors.DEF_COL}")
     house_pt = tally(house_hand)
     while house_pt < 17 and (house_pt < player_pt < 22):
         new_card = eodeck_check(ref_deck.draw_card())
@@ -47,7 +48,7 @@ def house_plays(player_pt, house_hand, ref_deck):
 
 
 def user_plays(player_hand,  ref_deck, house_hand):
-    print("---Your Turn---")
+    print(f"---{colors.TURN_COL}Your Turn{colors.DEF_COL}---")
     # print(player_hand)
     player_pt = tally(player_hand)
     while True:
@@ -94,6 +95,7 @@ def deal_in(ref_deck, house, player):
         test = ref_deck.blackjack()
         player.extend(test)
     """
+    print(f"---{colors.TURN_COL}Dealing Hands{colors.DEF_COL}---")
     for i in range(2):
         house.append(eodeck_check(ref_deck.draw_card()))
         player.append(eodeck_check(ref_deck.draw_card()))

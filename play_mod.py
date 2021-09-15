@@ -5,7 +5,12 @@ import colors
 def play(ref_deck):
     player_hand = []
     house_hand = []
-    reshuffle_at = ref_deck.depth * 52 * .25
+    reshuffle_at = (18, 23, 26)
+    reshuffle_idx = ref_deck.depth-1 if ref_deck.depth < 3 else 2
+
+    if ref_deck.remaining_cards() < reshuffle_at[reshuffle_idx]:
+        print("New card deck!")
+        ref_deck.refresh_stack()
 
     result = 0
 

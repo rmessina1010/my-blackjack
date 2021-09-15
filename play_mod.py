@@ -16,7 +16,8 @@ def play(ref_deck):
 
     deal_in(ref_deck, house_hand, player_hand)
     player_pt = user_plays(player_hand, ref_deck, house_hand)
-    house_pt = house_plays(player_pt, house_hand, ref_deck)
+    house_pt = tally(house_hand) if player_pt > 21 else house_plays(
+        player_pt, house_hand, ref_deck)
     show_hands(house_hand, player_hand, False)
 
     if player_pt > 21 or (player_pt < house_pt < 22):
@@ -40,7 +41,7 @@ def play(ref_deck):
 
 
 def house_plays(player_pt, house_hand, ref_deck):
-    print(f"\n---{colors.TURN_COL}House's Turn{colors.DEF_COL}")
+    print(f"\n---{colors.TURN_COL}House's Turn{colors.DEF_COL}---")
     house_pt = tally(house_hand)
     while house_pt < 17 and (house_pt < player_pt < 22):
         new_card = eodeck_check(ref_deck.draw_card())

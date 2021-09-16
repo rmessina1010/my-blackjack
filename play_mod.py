@@ -9,15 +9,16 @@ def play(ref_deck):
     reshuffle_idx = ref_deck.depth-1 if ref_deck.depth < 3 else 2
 
     if ref_deck.remaining_cards() < reshuffle_at[reshuffle_idx]:
-        print("New card deck!")
+        print("---New card deck!---")
         ref_deck.refresh_stack()
 
     result = 0
 
     deal_in(ref_deck, house_hand, player_hand)
     player_pt = user_plays(player_hand, ref_deck, house_hand)
-    house_pt = tally(house_hand) if player_pt > 21 else house_plays(
-        player_pt, house_hand, ref_deck)
+    if (player_pt == None):
+        return
+    house_pt = house_plays(player_pt, house_hand, ref_deck)
     show_hands(house_hand, player_hand, False)
 
     if player_pt > 21 or (player_pt < house_pt < 22):
@@ -65,7 +66,7 @@ def user_plays(player_hand,  ref_deck, house_hand):
             choice = input("[H]it or [S]tand? ")
             choice = None if len(choice) < 1 else choice[0].lower()
         if choice == "q":
-            exit_game()
+            return
         if choice == "s":
             return player_pt
         new_card = eodeck_check(ref_deck.draw_card())
@@ -119,3 +120,9 @@ def eodeck_check(card):
     if card == False:
         exit_game("No cards left to play.")
     return card
+
+
+def exit_message(balance, initial_bal):
+    if (initial_bal == balance):
+        return "You broke even."
+    return "You come out ahead by $" + str(balance - initial_bal) if initial_bal < balance else "You lost a total of $" + str(initial_bal - balance)

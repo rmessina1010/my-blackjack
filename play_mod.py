@@ -1,4 +1,5 @@
 from views_mod import show_draw, show_hands
+from calc_odds import hit_or_stand
 import colors
 
 
@@ -60,11 +61,15 @@ def user_plays(player_hand,  ref_deck, house_hand):
     player_pt = tally(player_hand)
     while True:
         choice = False
-        while choice != "h" and choice != "s" and choice != "q":
+        while choice != "h" and choice != "s" and choice != "q" and choice != "?":
             if player_pt == 21:
                 return player_pt
             choice = input("[H]it or [S]tand? ")
             choice = None if len(choice) < 1 else choice[0].lower()
+        if choice == "?":
+            suggestion = hit_or_stand(player_pt, ref_deck)
+            print("I suggest you " + suggestion)
+            continue
         if choice == "q":
             return
         if choice == "s":
